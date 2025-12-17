@@ -1,11 +1,10 @@
-name: Build CircuitJS with Ant
+name: Build CircuitJS
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]
-  workflow_dispatch:
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -15,21 +14,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Java (Temurin JDK 17)
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Install Apache Ant
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ant
-
-      - name: Verify tools
-        run: |
-          java -version
-          ant -version
+          distribution: 'temurin'
+          java-version: '11'
 
       - name: Download GWT SDK
         run: |
@@ -38,11 +27,9 @@ jobs:
           mv gwt-2.9.0 gwt-sdk
 
       - name: Build with Ant
-        run: |
-          ant -diagnostics
-          ant
+        run: ant compile
 
-       - name: Upload build artifacts (compiled JS)
+      - name: Upload build artifacts (compiled JS)
         if: success()
         uses: actions/upload-artifact@v4
         with:
