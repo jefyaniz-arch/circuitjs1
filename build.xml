@@ -1,0 +1,19 @@
+<project name="CircuitJS-GWT" default="compile" basedir=".">
+    <property name="src" location="src"/>
+    <property name="build" location="build"/>
+    <property name="dist" location="dist"/>
+
+    <!-- Ajusta la ruta al módulo GWT -->
+    <property name="gwt-module" value="circuitjs1"/>
+
+    <target name="compile">
+        <mkdir dir="${dist}"/>
+        <java classname="com.google.gwt.dev.Compiler" fork="true" failonerror="true">
+            <arg value="${gwt-module}"/>
+            <classpath>
+                <pathelement location="${src}"/>
+                <!-- Aquí necesitamos añadir gwt-dev.jar y gwt-user.jar -->
+            </classpath>
+        </java>
+    </target>
+</project>
