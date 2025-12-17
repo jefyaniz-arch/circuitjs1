@@ -7,7 +7,8 @@
     <property name="gwt-sdk" location="gwt-sdk"/>
 
     <!-- Nombre del módulo GWT (según circuitjs1.gwt.xml) -->
-    <property name="gwt-module" value="circuitjs1"/>
+    <property name="gwt-module" value="com.lushprojects.circuitjs1.circuitjs1"/>
+
 
     <!-- Compilar con GWT -->
     <target name="compile">
@@ -16,6 +17,7 @@
             <arg value="${gwt-module}"/>
             <classpath>
                 <pathelement location="${src}"/>
+                <pathelement location="${src}/com/lushprojects/circuitjs1"/>
                 <pathelement location="${gwt-sdk}/gwt-dev.jar"/>
                 <pathelement location="${gwt-sdk}/gwt-user.jar"/>
             </classpath>
