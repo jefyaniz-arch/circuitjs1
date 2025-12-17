@@ -1,0 +1,46 @@
+name: Build CircuitJS with Ant
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java (Temurin JDK 17)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Install Apache Ant
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ant
+
+      - name: Verify tools
+        run: |
+          java -version
+          ant -version
+
+      - name: Build with Ant
+        run: |
+          ant -diagnostics
+          ant
+
+      - name: Upload build artifacts (JARs)
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: circuitjs-build
+          path: |
+            **/*.jar
+            build/**/*
