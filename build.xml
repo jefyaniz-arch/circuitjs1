@@ -1,19 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project name="CircuitJS-GWT" default="compile" basedir=".">
+    <!-- Directorios -->
     <property name="src" location="src"/>
     <property name="build" location="build"/>
     <property name="dist" location="dist"/>
+    <property name="gwt-sdk" location="gwt-sdk"/>
 
-    <!-- Ajusta la ruta al módulo GWT -->
+    <!-- Nombre del módulo GWT (según circuitjs1.gwt.xml) -->
     <property name="gwt-module" value="circuitjs1"/>
 
+    <!-- Compilar con GWT -->
     <target name="compile">
         <mkdir dir="${dist}"/>
         <java classname="com.google.gwt.dev.Compiler" fork="true" failonerror="true">
             <arg value="${gwt-module}"/>
             <classpath>
                 <pathelement location="${src}"/>
-                <!-- Aquí necesitamos añadir gwt-dev.jar y gwt-user.jar -->
+                <pathelement location="${gwt-sdk}/gwt-dev.jar"/>
+                <pathelement location="${gwt-sdk}/gwt-user.jar"/>
             </classpath>
         </java>
     </target>
+
+    <!-- Limpiar directorios -->
+    <target name="clean">
+        <delete dir="${build}"/>
+        <delete dir="${dist}"/>
+    </target>
 </project>
+
