@@ -9,12 +9,13 @@
     <!-- Nombre del módulo GWT (según circuitjs1.gwt.xml) -->
     <property name="gwt-module" value="com.lushprojects.circuitjs1.circuitjs1"/>
 
-
     <!-- Compilar con GWT -->
     <target name="compile">
         <mkdir dir="${dist}"/>
         <java classname="com.google.gwt.dev.Compiler" fork="true" failonerror="true">
             <arg value="${gwt-module}"/>
+            <arg value="-war"/>
+            <arg value="${dist}"/>
             <classpath>
                 <pathelement location="${src}"/>
                 <pathelement location="${src}/com/lushprojects/circuitjs1"/>
