@@ -42,10 +42,11 @@ jobs:
           ant -diagnostics
           ant
 
-            - name: Upload build artifacts (compiled JS)
+       - name: Upload build artifacts (compiled JS)
         if: success()
         uses: actions/upload-artifact@v4
         with:
           name: circuitjs-build
           path: dist/**
+
 
